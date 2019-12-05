@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
   CANSparkMax driveBL;
   CANSparkMax driveBR;
 
+  
   double leftPower;
   double rightPower;
 
@@ -55,6 +56,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+
+    //
     drivestick = new Joystick(0);
     opstick = new Joystick(1);
 
