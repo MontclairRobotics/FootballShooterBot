@@ -7,7 +7,13 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,15 +25,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-
+  CANSparkMax leftLaunch;
+  CANSparkMax rightLaunch; 
+  JoystickButton launchButton;
+  Joystick opStick;
 
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
+
   @Override
   public void robotInit() {
-
+    leftLaunch = new CANSparkMax(4, MotorType.kBrushless);
+    rightLaunch = new CANSparkMax(5, MotorType.kBrushless);
+    
+  }
+  public void teleopInit() {
+    opStick = new Joystick(0);
+    launchButton = new JoystickButton(opStick, 0);
   }
 
   /**
@@ -70,6 +86,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    if (launchButton.get()) {
+        leftLaunch.set(0.1);
+        rightLaunch.set(0.1);
+    } else {
+        leftLaunch.set(0);
+        rightLaunch.set(0);
+    }
   }
 
   /**
