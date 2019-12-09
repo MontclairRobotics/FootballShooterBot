@@ -53,8 +53,8 @@ public class Robot extends TimedRobot {
   }
   public void teleopInit() {
     //Sets variables to joystick/button
-    opStick = new Joystick(0);
-    launchButton = new JoystickButton(opStick, 0);
+    opStick = new Joystick(1);
+    launchButton = new JoystickButton(opStick, 2);
   }
 
   /**
