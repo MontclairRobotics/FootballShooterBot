@@ -34,12 +34,11 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
-
+  
   @Override
   public void robotInit() {
     leftLaunch = new CANSparkMax(4, MotorType.kBrushless);
     rightLaunch = new CANSparkMax(5, MotorType.kBrushless);
-    
   }
   public void teleopInit() {
     opStick = new Joystick(0);
