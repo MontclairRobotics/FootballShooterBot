@@ -10,9 +10,10 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -33,7 +34,8 @@ public class Robot extends TimedRobot {
   TalonSRX leftAngle;
   JoystickButton launchButton;
   Joystick opStick;
-
+  Compressor c;
+  Solenoid s;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -46,6 +48,8 @@ public class Robot extends TimedRobot {
     rightLaunchWheel = new TalonSRX(5);
     rightAngle = new TalonSRX(6);
     leftAngle = new TalonSRX(7);
+    c = new Compressor(0);
+    s = new Solenoid(0);
   }
   public void teleopInit() {
     //Sets variables to joystick/button
@@ -96,7 +100,7 @@ public class Robot extends TimedRobot {
     leftAngle.set(ControlMode.PercentOutput, opStick.getY() /2);//sets angle to the joystick value divided by 2
     rightAngle.set(ControlMode.PercentOutput, opStick.getX() /2);
     if (launchButton.get()) {
-        // Add in pnemautics then...
+
         leftLaunchWheel.set(ControlMode.PercentOutput, 0.5);//Fires the football
         rightLaunchWheel.set(ControlMode.PercentOutput, 0.5);
     } else {
