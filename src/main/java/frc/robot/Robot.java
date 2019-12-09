@@ -86,13 +86,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if (launchButton.get()) {
-        leftLaunch.set(0.1);
-        rightLaunch.set(0.1);
-    } else {
-        leftLaunch.set(0);
-        rightLaunch.set(0);
-    }
+    leftLaunch.set(opStick.getY() / 2);
+    rightLaunch.set(opStick.getX() /2);
+
   }
 
   /**
