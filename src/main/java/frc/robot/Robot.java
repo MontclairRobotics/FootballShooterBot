@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -25,8 +27,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-  CANSparkMax leftLaunch;
-  CANSparkMax rightLaunch; 
+  //Defining motors and joystick
+  TalonSRX leftLaunchWheel;
+  TalonSRX rightLaunchWheel; 
+  TalonSRX rightAngle;
+  TalonSRX leftAngle;
   JoystickButton launchButton;
   Joystick opStick;
 
@@ -37,10 +42,14 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
-    leftLaunch = new CANSparkMax(4, MotorType.kBrushless);
-    rightLaunch = new CANSparkMax(5, MotorType.kBrushless);
+    //sets variables to motors
+    leftLaunchWheel = new TalonSRX(4);
+    rightLaunchWheel = new TalonSRX(5);
+    rightAngle = new TalonSRX(6);
+    leftAngle = new TalonSRX(7);
   }
   public void teleopInit() {
+    //Sets variables to joystick/button
     opStick = new Joystick(0);
     launchButton = new JoystickButton(opStick, 0);
   }
@@ -85,8 +94,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    leftLaunch.set(opStick.getY() / 2);
-    rightLaunch.set(opStick.getX() /2);
+    leftAngle.set(ControlMode.PercentOutput, opStick.getY() /2);//sets angle to the joystick value divided by 2
+    rightAngle.set(ControlMode.PercentOutput, opStick.getX() /2);
+    if (launchButton.get()) {
+        // Add in pnemautics then...
+        leftLaunchWheel.set(ControlMode.PercentOutput, 0.5);//Fires the football
+        rightLaunchWheel.set(ControlMode.PercentOutput, 0.5);
+    } else {
+      leftLaunchWheel.set(ControlMode.PercentOutput, 0); // Turns off motors if not pressed 
+      rightLaunchWheel.set(ControlMode.PercentOutput, 0);
+    }
 
   }
 
