@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -32,24 +31,30 @@ public class Robot extends TimedRobot {
   TalonSRX rightLaunchWheel; 
   TalonSRX rightAngle;
   TalonSRX leftAngle;
+  
+  //Defining Joysticks
   JoystickButton launchButton;
   Joystick opStick;
-  Compressor c;
-  Solenoid s;
+
+  //Defining Pneumatics
+  Compressor compressor;
+  Solenoid solenoid;
+
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
-  
   @Override
   public void robotInit() {
-    //sets variables to motors
+    //sets variables to motors (PORTS/DEVICE NUMBERS NOT FINAL)
     leftLaunchWheel = new TalonSRX(4);
     rightLaunchWheel = new TalonSRX(5);
     rightAngle = new TalonSRX(6);
     leftAngle = new TalonSRX(7);
-    c = new Compressor(0);
-    s = new Solenoid(0);
+
+    compressor = new Compressor(0);
+    solenoid = new Solenoid(0);
   }
   public void teleopInit() {
     //Sets variables to joystick/button
