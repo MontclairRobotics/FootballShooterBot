@@ -99,10 +99,20 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     leftAngle.set(ControlMode.PercentOutput, opStick.getY() /2);//sets angle to the joystick value divided by 2
     rightAngle.set(ControlMode.PercentOutput, opStick.getX() /2);
+    if (c.getPressureSwitchValue()) {
+      c.start();
+    } else {
+      c.stop();
+    }
+    
     if (launchButton.get()) {
 
-        leftLaunchWheel.set(ControlMode.PercentOutput, 0.5);//Fires the football
+        leftLaunchWheel.set(ControlMode.PercentOutput, 0.5);//motors on
         rightLaunchWheel.set(ControlMode.PercentOutput, 0.5);
+        s.set(true);// Fires solenoid
+        s.set(false);
+        leftLaunchWheel.set(ControlMode.PercentOutput, 0);  // motors off
+        rightLaunchWheel.set(ControlMode.PercentOutput, 0);
     } else {
       leftLaunchWheel.set(ControlMode.PercentOutput, 0); // Turns off motors if not pressed 
       rightLaunchWheel.set(ControlMode.PercentOutput, 0);
