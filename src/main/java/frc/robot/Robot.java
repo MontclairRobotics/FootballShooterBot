@@ -104,18 +104,24 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     leftAngle.set(ControlMode.PercentOutput, opStick.getY() /2);//sets angle to the joystick value divided by 2
     rightAngle.set(ControlMode.PercentOutput, opStick.getX() /2);
-    if (c.getPressureSwitchValue()) {
-      c.start();
+    if (compressor.getPressureSwitchValue()) {
+      compressor.start();
     } else {
-      c.stop();
+      compressor.stop();
     }
     
     if (launchButton.get()) {
 
         leftLaunchWheel.set(ControlMode.PercentOutput, 0.5);//motors on
         rightLaunchWheel.set(ControlMode.PercentOutput, 0.5);
-        s.set(true);// Fires solenoid
-        s.set(false);
+        solenoid.set(true);// Fires solenoid
+        try {
+          solenoid.wait(500);
+        }
+        catch (Exception e) {
+          solenoid.set(false);
+        }
+        solenoid.set(false);
         leftLaunchWheel.set(ControlMode.PercentOutput, 0);  // motors off
         rightLaunchWheel.set(ControlMode.PercentOutput, 0);
     } else {
