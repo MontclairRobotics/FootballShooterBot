@@ -4,10 +4,11 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
-
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
@@ -36,7 +37,7 @@ public class Robot extends TimedRobot {
   CANSparkMax driveBL;
   CANSparkMax driveBR;
 
-  
+
   double leftPower;
   double rightPower;
 
