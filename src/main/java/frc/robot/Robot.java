@@ -7,12 +7,12 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.vision.VisionThread;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,12 +40,26 @@ public class Robot extends TimedRobot {
   double leftPower;
   double rightPower;
 
+  private static final int IMG_WIDTH = 320;
+  private static final int IMG_HEIGHT = 240;
+
+  private VisionThread visionThread;
+  private double centerX = 0.0;
+  private RobotDrive drive;
+
+  private final Object imgLock;
+
+  {
+    imgLock = new Object();
+  }
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
   @Override
   public void robotInit() {
+
 
     //All port values are temporary
     driveFL = new CANSparkMax(0, MotorType.kBrushless);
@@ -60,6 +74,7 @@ public class Robot extends TimedRobot {
     //
     drivestick = new Joystick(0);
     opstick = new Joystick(1);
+
 
   }
 
