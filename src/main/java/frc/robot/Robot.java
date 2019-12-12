@@ -7,6 +7,10 @@
 
 package frc.robot;
 
+
+import java.util.HashSet;
+import frc.team555.FootballShooter.RobotLikeComponent;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -18,6 +22,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -26,6 +31,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  // Components
+  Iterable<RobotLikeComponent>   componentsForDelegation;
+
   //Defining motors and joystick
   TalonSRX leftLaunchWheel;
   TalonSRX rightLaunchWheel; 
@@ -47,6 +56,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    componentsForDelegation.forEach((component) -> component.robotInit());
+
     //sets variables to motors (PORTS/DEVICE NUMBERS NOT FINAL)
     leftLaunchWheel = new TalonSRX(4);
     rightLaunchWheel = new TalonSRX(5);
@@ -57,6 +69,9 @@ public class Robot extends TimedRobot {
     solenoid = new Solenoid(0);
   }
   public void teleopInit() {
+
+    componentsForDelegation.forEach((component) -> component.teleopInit());
+
     //Sets variables to joystick/button
     opStick = new Joystick(1);
     launchButton = new JoystickButton(opStick, 2);
@@ -72,6 +87,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+
+    componentsForDelegation.forEach((component) -> component.roboticPeriodic());
   }
 
   /**
@@ -87,6 +104,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+
+    componentsForDelegation.forEach((component) -> component.autonomousInit());
+
   }
 
   /**
@@ -94,6 +114,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    componentsForDelegation.forEach((component) -> component.autonomousPeriodic());
 
   }
 
@@ -102,6 +123,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    componentsForDelegation.forEach((component) -> component.teleopPeriodic());
+
+
     leftAngle.set(ControlMode.PercentOutput, opStick.getY() /2);//sets angle to the joystick value divided by 2
     rightAngle.set(ControlMode.PercentOutput, opStick.getX() /2);
     if (compressor.getPressureSwitchValue()) {
@@ -136,5 +160,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    componentsForDelegation.forEach((component) -> component.testPeriodic());
+
+  }
+
+
+  Robot() {
+    componentsForDelegation = new HashSet<RobotLikeComponent>(); // An initially empty set of components
   }
 }
