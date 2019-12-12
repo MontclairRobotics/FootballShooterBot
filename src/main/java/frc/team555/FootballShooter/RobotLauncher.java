@@ -14,18 +14,18 @@ public class RobotLauncher implements RobotLikeComponent {
 
 
     //Defining motors and joystick
-    TalonSRX leftLaunchWheel;
-    TalonSRX rightLaunchWheel;
-    TalonSRX rightAngle;
-    TalonSRX leftAngle;
+    private TalonSRX leftLaunchWheel;
+    private TalonSRX rightLaunchWheel;
+    private TalonSRX rightAngle;
+    private TalonSRX leftAngle;
 
     //Defining Joysticks
-    JoystickButton launchButton;
-    Joystick opStick;
+    private JoystickButton launchButton;
+    private Joystick opStick;
 
     //Defining Pneumatics
-    Compressor compressor;
-    Solenoid solenoid;
+    private Compressor compressor;
+    private Solenoid solenoid;
 
 
     @Override
