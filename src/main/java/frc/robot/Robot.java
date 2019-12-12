@@ -7,9 +7,18 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.core.ControlSystem;
+import frc.robot.core.Drivetrain;
+import frc.robot.core.Launcher;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,10 +28,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+    private ControlSystem controlSystem;
+    private Drivetrain drivetrain;
+    private Launcher launcher;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -30,9 +39,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+
+      controlSystem = new ControlSystem(this);
+      drivetrain = new Drivetrain(this);
+      launcher = new Launcher(this);
+
+      controlSystem.init(true);
+      drivetrain.init(true);
+      launcher.init(true);
+
+  }
+
+  @Override
+  public void teleopInit() {
+
   }
 
   /**
@@ -45,6 +65,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+
+
   }
 
   /**
@@ -60,9 +82,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /**
@@ -70,15 +89,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
-    }
   }
 
   /**
@@ -86,6 +96,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+      drivetrain.teleop(true);
+      launcher.teleop(true);
   }
 
   /**
@@ -93,5 +105,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  public ControlSystem getControlSystem(){
+      return controlSystem;
   }
 }
