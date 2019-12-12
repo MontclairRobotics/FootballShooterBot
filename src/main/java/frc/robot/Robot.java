@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-
+import java.util.Collection;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.team555.FootballShooter.RobotLikeComponent;
 
@@ -24,7 +24,7 @@ import java.util.HashSet;
 public class Robot extends TimedRobot {
 
   // Components
-  Iterable<RobotLikeComponent>   componentsForDelegation;
+  Collection<RobotLikeComponent>   componentsForDelegation;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -32,7 +32,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-
     componentsForDelegation.forEach((component) -> component.robotInit());
 
 
