@@ -32,6 +32,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    // This is a no-no, but I'm not sure of the proper way to inject components into a Robot
+    componentsForDelegation.add(new frc.team555.FootballShooter.RobotLauncher());
+
     componentsForDelegation.forEach((component) -> component.robotInit());
 
 
