@@ -7,14 +7,14 @@
 
 package frc.robot;
 
-<<<<<<< HEAD
+
 import java.util.Collection;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.team555.FootballShooter.RobotLikeComponent;
 
 import java.util.HashSet;
 
-=======
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.core.ControlSystem;
 import frc.robot.core.Drivetrain;
 import frc.robot.core.Launcher;
->>>>>>> team/44pu2AfubU
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,14 +38,15 @@ import frc.robot.core.Launcher;
  */
 public class Robot extends TimedRobot {
 
-<<<<<<< HEAD
+
   // Components
   Collection<RobotLikeComponent>   componentsForDelegation;
-=======
+
+    // Note: these should be moved into componentsForDelegation
     private ControlSystem controlSystem;
     private Drivetrain drivetrain;
     private Launcher launcher;
->>>>>>> team/44pu2AfubU
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -54,13 +55,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-<<<<<<< HEAD
+
     // This is a no-no, but I'm not sure of the proper way to inject components into a Robot
     componentsForDelegation.add(new frc.team555.FootballShooter.RobotLauncher());
 
     componentsForDelegation.forEach((component) -> component.robotInit());
 
-=======
+
       controlSystem = new ControlSystem(this);
       drivetrain = new Drivetrain(this);
       launcher = new Launcher(this);
@@ -68,18 +69,16 @@ public class Robot extends TimedRobot {
       controlSystem.init(true);
       drivetrain.init(true);
       launcher.init(true);
->>>>>>> team/44pu2AfubU
+
 
   }
 
   @Override
   public void teleopInit() {
 
-<<<<<<< HEAD
+
     componentsForDelegation.forEach((component) -> component.teleopInit());
 
-=======
->>>>>>> team/44pu2AfubU
   }
 
   /**
@@ -93,11 +92,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
 
-<<<<<<< HEAD
-    componentsForDelegation.forEach((component) -> component.roboticPeriodic());
-=======
 
->>>>>>> team/44pu2AfubU
+    componentsForDelegation.forEach((component) -> component.roboticPeriodic());
+
   }
 
   /**
@@ -113,12 +110,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-<<<<<<< HEAD
+
 
     componentsForDelegation.forEach((component) -> component.autonomousInit());
 
-=======
->>>>>>> team/44pu2AfubU
   }
 
   /**
@@ -126,11 +121,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-<<<<<<< HEAD
-    componentsForDelegation.forEach((component) -> component.autonomousPeriodic());
 
-=======
->>>>>>> team/44pu2AfubU
+    componentsForDelegation.forEach((component) -> component.autonomousPeriodic());
   }
 
   /**
@@ -138,14 +130,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-<<<<<<< HEAD
+
     componentsForDelegation.forEach((component) -> component.teleopPeriodic());
-
-
-=======
+    
+    // Note: These should be changed to telepopOeriodic() calls on these objects
+    // via the componentsForDelegation collection
       drivetrain.teleop(true);
       launcher.teleop(true);
->>>>>>> team/44pu2AfubU
+
   }
 
   /**
