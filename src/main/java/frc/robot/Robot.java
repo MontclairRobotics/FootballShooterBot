@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
       launcher = new Launcher(this);
 
       controlSystem.init(true);
-      drivetrain.init(true);
+      drivetrain.robotInit(true);
       launcher.init(true);
 
 
@@ -127,7 +127,7 @@ public class Robot extends TimedRobot {
     
     // Note: These should be changed to telepopOeriodic() calls on these objects
     // via the componentsForDelegation collection
-      drivetrain.teleop(true);
+      drivetrain.teleopPeriodic(true);
       launcher.teleop(true);
 
   }

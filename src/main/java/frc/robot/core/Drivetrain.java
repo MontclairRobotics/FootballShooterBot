@@ -13,7 +13,8 @@ import frc.robot.Robot;
 import frc.robot.core.ControlSystem.Axis;
 import frc.robot.core.ControlSystem.Sticks;
 
-public class Drivetrain{
+public class Drivetrain implements RobotLikeComponent
+{
 
     private Robot robot;
 
@@ -31,7 +32,7 @@ public class Drivetrain{
         this.robot = robot;
     }
 
-    public void init(boolean debug){
+    public void robotInit(boolean debug){
         controlSystem = robot.getControlSystem();
         
         driveFL = new CANSparkMax(0, MotorType.kBrushless);
@@ -45,7 +46,7 @@ public class Drivetrain{
         
     }
 
-    public void teleop(boolean debug){
+    public void teleopPeriodic(boolean debug){
         leftPower = controlSystem.getJoystickAxis(Sticks.DRIVE_STICK, Axis.X) 
             + controlSystem.getJoystickAxis(Sticks.DRIVE_STICK, Axis.Y);
 
