@@ -36,7 +36,6 @@ public class Robot extends TimedRobot {
 
     // Note: these should be moved into componentsForDelegation
     private ControlSystem controlSystem;
-    private Drivetrain drivetrain;
     private Launcher launcher;
 
 
@@ -48,18 +47,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
 
-    // This is a no-no, but I'm not sure of the proper way to inject components into a Robot
+    // This is a no-no, but I'm not sure of the proper way to inject components into a Robot.
     componentsForDelegation.add(new frc.team555.FootballShooter.RobotLauncher());
+    componentsForDelegation.add(new Drivetrain(this));
 
     componentsForDelegation.forEach((component) -> component.robotInit());
 
 
       controlSystem = new ControlSystem(this);
-      drivetrain = new Drivetrain(this);
       launcher = new Launcher(this);
 
       controlSystem.init(true);
-      drivetrain.robotInit(true);
       launcher.init(true);
 
 
@@ -127,7 +125,6 @@ public class Robot extends TimedRobot {
     
     // Note: These should be changed to telepopOeriodic() calls on these objects
     // via the componentsForDelegation collection
-      drivetrain.teleopPeriodic(true);
       launcher.teleop(true);
 
   }
