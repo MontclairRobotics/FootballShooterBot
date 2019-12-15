@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
 
 
   // Components
-  Collection<RobotLikeComponent>   componentsForDelegation;
+  private Collection<RobotLikeComponent>   componentsForDelegation;
 
     // Note: these should be moved into componentsForDelegation
     private ControlSystem controlSystem;
