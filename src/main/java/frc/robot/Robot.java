@@ -15,15 +15,7 @@ import frc.team555.FootballShooter.RobotLikeComponent;
 import java.util.HashSet;
 
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.core.ControlSystem;
 import frc.robot.core.Drivetrain;
 import frc.robot.core.Launcher;
