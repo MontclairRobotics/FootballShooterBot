@@ -10,7 +10,7 @@ package frc.robot;
 
 import java.util.Collection;
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.team555.FootballShooter.RobotLikeComponent;
+import frc.robot.core.RobotLikeComponent;
 
 import java.util.HashSet;
 

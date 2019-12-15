@@ -1,6 +1,8 @@
 package frc.team555.FootballShooter;
 
 
+import frc.robot.core.RobotLikeComponent;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 

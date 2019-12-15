@@ -1,4 +1,4 @@
-package frc.team555.FootballShooter;
+package frc.robot.core;
 
 public interface RobotLikeComponent {
     default public void robotInit() {}
