@@ -63,6 +63,7 @@ public class ControlSystem implements RobotLikeComponent
         this.robot = robot;
     }
 
+    @Override
     public void robotInit(boolean debug){
         driveStick = new Joystick(Sticks.DRIVE_STICK.getPort());
         opStick = new Joystick(Sticks.OPERATOR_STICK.getPort());

@@ -32,6 +32,7 @@ public class Drivetrain implements RobotLikeComponent
         this.robot = robot;
     }
 
+    @Override
     public void robotInit(boolean debug){
         controlSystem = robot.getControlSystem();
         
@@ -46,6 +47,7 @@ public class Drivetrain implements RobotLikeComponent
         
     }
 
+    @Override
     public void teleopPeriodic(boolean debug){
         leftPower = controlSystem.getJoystickAxis(Sticks.DRIVE_STICK, Axis.X) 
             + controlSystem.getJoystickAxis(Sticks.DRIVE_STICK, Axis.Y);
