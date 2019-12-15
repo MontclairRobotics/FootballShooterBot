@@ -34,8 +34,14 @@ public class Robot extends TimedRobot {
   // Components
   private Collection<RobotLikeComponent>   componentsForDelegation;
 
-    // Note: these should be moved into componentsForDelegation
+    // The object referenced is also in componentsForDelegation, but a reference
+    // is explicitly kept here to support getControlSystem().  Is there a better 
+    // and more generic approach, such as a lookup table?  The object receives
+    // all the necessary method dispatching via componentsForDelegation.
     private ControlSystem controlSystem;
+
+
+    // Note: these should be moved into componentsForDelegation
     private Launcher launcher;
 
 
@@ -51,13 +57,19 @@ public class Robot extends TimedRobot {
     componentsForDelegation.add(new frc.team555.FootballShooter.RobotLauncher());
     componentsForDelegation.add(new Drivetrain(this));
 
+    // Hold a reference to this for subsequent use, but also keep it in 
+    // the collection of components for dispatching.  Is there a better, more
+    // generic, approach than a private data member?  Perhaps a lookup table?
+    controlSystem = new ControlSystem(this);
+    componentsForDelegation.add(controlSystem);
+
+
+
     componentsForDelegation.forEach((component) -> component.robotInit());
 
 
-      controlSystem = new ControlSystem(this);
       launcher = new Launcher(this);
 
-      controlSystem.robotInit(true);
       launcher.init(true);
 
 
