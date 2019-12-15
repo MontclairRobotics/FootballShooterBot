@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
       controlSystem = new ControlSystem(this);
       launcher = new Launcher(this);
 
-      controlSystem.init(true);
+      controlSystem.robotInit(true);
       launcher.init(true);
 
 

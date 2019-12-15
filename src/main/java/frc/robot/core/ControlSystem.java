@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 
-public class ControlSystem{
+public class ControlSystem implements RobotLikeComponent
+{
     
     private Robot robot;
 
@@ -62,7 +63,7 @@ public class ControlSystem{
         this.robot = robot;
     }
 
-    public void init(boolean debug){
+    public void robotInit(boolean debug){
         driveStick = new Joystick(Sticks.DRIVE_STICK.getPort());
         opStick = new Joystick(Sticks.OPERATOR_STICK.getPort());
         
