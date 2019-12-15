@@ -53,7 +53,6 @@ public class Robot extends TimedRobot {
 
 
     // This is a no-no, but I'm not sure of the proper way to inject components into a Robot.
-    componentsForDelegation.add(new frc.team555.FootballShooter.RobotLauncher());
     componentsForDelegation.add(new Drivetrain(this));
     componentsForDelegation.add(new Launcher(this));
 
