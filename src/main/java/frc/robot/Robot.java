@@ -41,8 +41,7 @@ public class Robot extends TimedRobot {
     private ControlSystem controlSystem;
 
 
-    // Note: these should be moved into componentsForDelegation
-    private Launcher launcher;
+
 
 
   /**
@@ -56,6 +55,7 @@ public class Robot extends TimedRobot {
     // This is a no-no, but I'm not sure of the proper way to inject components into a Robot.
     componentsForDelegation.add(new frc.team555.FootballShooter.RobotLauncher());
     componentsForDelegation.add(new Drivetrain(this));
+    componentsForDelegation.add(new Launcher(this));
 
     // Hold a reference to this for subsequent use, but also keep it in 
     // the collection of components for dispatching.  Is there a better, more
@@ -66,10 +66,6 @@ public class Robot extends TimedRobot {
 
 
     componentsForDelegation.forEach((component) -> component.robotInit());
-
-
-      launcher = new Launcher(this);
-      launcher.robotInit(true);
 
 
   }
@@ -133,11 +129,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     componentsForDelegation.forEach((component) -> component.teleopPeriodic());
-    
-    // Note: These should be changed to telepopOeriodic() calls on these objects
-    // via the componentsForDelegation collection
-      launcher.teleopPeriodic(true);
-
   }
 
   /**
