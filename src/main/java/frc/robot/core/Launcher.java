@@ -10,7 +10,8 @@ import frc.robot.core.ControlSystem.Axis;
 import frc.robot.core.ControlSystem.OperatorButtons;
 import frc.robot.core.ControlSystem.Sticks;
 
-public class Launcher {
+public class Launcher implements RobotLikeComponent
+{
 
     private Robot robot;
     private ControlSystem controlSystem;
@@ -27,7 +28,8 @@ public class Launcher {
         this.robot = robot;
     }
 
-    public void init(boolean debug){
+    @Override
+    public void robotInit(boolean debug){
 
         controlSystem = robot.getControlSystem();
 
@@ -44,7 +46,8 @@ public class Launcher {
         }
     }
 
-    public void teleop(boolean debug){
+    @Override
+    public void teleopPeriodic(boolean debug){
 
         leftAngleMotor.set(ControlMode.PercentOutput, 
             controlSystem.getJoystickAxis(Sticks.OPERATOR_STICK, Axis.Y)/2);
