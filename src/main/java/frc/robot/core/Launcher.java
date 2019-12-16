@@ -62,14 +62,7 @@ public class Launcher {
 
             leftLaunchMotor.set(ControlMode.PercentOutput, 0.5);//motors on
             rightLaunchMotor.set(ControlMode.PercentOutput, 0.5);
-            solenoid.set(true);// Fires solenoid
-            try {
-                solenoid.wait(500);
-            }
-            catch (Exception e) {
-                solenoid.set(false);
-            }
-            solenoid.set(false);
+            solenoid.setPulseDuration(0.5);// Fires solenoid for half a second then turns it off
             leftLaunchMotor.set(ControlMode.PercentOutput, 0);  // motors off
             rightLaunchMotor.set(ControlMode.PercentOutput, 0);
         } else {
