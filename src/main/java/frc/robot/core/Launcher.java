@@ -65,7 +65,8 @@ public class Launcher implements RobotLikeComponent
 
             leftLaunchMotor.set(ControlMode.PercentOutput, 0.5);//motors on
             rightLaunchMotor.set(ControlMode.PercentOutput, 0.5);
-            solenoid.setPulseDuration(0.5);// Fires solenoid for half a second then turns it off
+            solenoid.setPulseDuration(0.5);
+            solenoid.startPulse();// Fires solenoid for half a second then turns it off
             leftLaunchMotor.set(ControlMode.PercentOutput, 0);  // motors off
             rightLaunchMotor.set(ControlMode.PercentOutput, 0);
         } else {
