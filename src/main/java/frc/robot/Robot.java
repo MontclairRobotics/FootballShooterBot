@@ -7,18 +7,19 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Spark;
+import java.util.Collection;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.core.RobotLikeComponent;
+
+import java.util.HashSet;
+
+
+
 import frc.robot.core.ControlSystem;
 import frc.robot.core.Drivetrain;
 import frc.robot.core.Launcher;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,9 +30,19 @@ import frc.robot.core.Launcher;
  */
 public class Robot extends TimedRobot {
 
+
+  // Components
+  private Collection<RobotLikeComponent>   componentsForDelegation;
+
+    // The object referenced is also in componentsForDelegation, but a reference
+    // is explicitly kept here to support getControlSystem().  Is there a better 
+    // and more generic approach, such as a lookup table?  The object receives
+    // all the necessary method dispatching via componentsForDelegation.
     private ControlSystem controlSystem;
-    private Drivetrain drivetrain;
-    private Launcher launcher;
+
+
+
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -40,18 +51,29 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-      controlSystem = new ControlSystem(this);
-      drivetrain = new Drivetrain(this);
-      launcher = new Launcher(this);
 
-      controlSystem.init(true);
-      drivetrain.init(true);
-      launcher.init(true);
+    // This is a no-no, but I'm not sure of the proper way to inject components into a Robot.
+    componentsForDelegation.add(new Drivetrain(this));
+    componentsForDelegation.add(new Launcher(this));
+
+    // Hold a reference to this for subsequent use, but also keep it in 
+    // the collection of components for dispatching.  Is there a better, more
+    // generic, approach than a private data member?  Perhaps a lookup table?
+    controlSystem = new ControlSystem(this);
+    componentsForDelegation.add(controlSystem);
+
+
+
+    componentsForDelegation.forEach((component) -> component.robotInit());
+
 
   }
 
   @Override
   public void teleopInit() {
+
+
+    componentsForDelegation.forEach((component) -> component.teleopInit());
 
   }
 
@@ -66,6 +88,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
 
+
+    componentsForDelegation.forEach((component) -> component.roboticPeriodic());
 
   }
 
@@ -82,6 +106,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+
+
+    componentsForDelegation.forEach((component) -> component.autonomousInit());
+
   }
 
   /**
@@ -89,6 +117,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+
+    componentsForDelegation.forEach((component) -> component.autonomousPeriodic());
   }
 
   /**
@@ -96,8 +126,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-      drivetrain.teleop(true);
-      launcher.teleop(true);
+
+    componentsForDelegation.forEach((component) -> component.teleopPeriodic());
   }
 
   /**
@@ -105,6 +135,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    componentsForDelegation.forEach((component) -> component.testPeriodic());
+
+  }
+
+
+  Robot() {
+    componentsForDelegation = new HashSet<RobotLikeComponent>(); // An initially empty set of components
+
   }
 
   public ControlSystem getControlSystem(){
